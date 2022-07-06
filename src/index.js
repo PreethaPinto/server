@@ -1,4 +1,7 @@
 const app = require('express')();
+
+app.use(express.json());
+
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -32,6 +35,15 @@ app.get('/products', (req, res) => {
 
         })
     })
+})
+
+app.post('/products', (req, res) => {
+    const product = {
+        id: products.length + 1;
+        name: req.body.name
+    };
+    products.push(product);
+    res.send(product);
 })
 
 app.listen(8080, () => {
